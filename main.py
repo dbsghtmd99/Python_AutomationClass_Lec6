@@ -1,18 +1,8 @@
-# Python_AutomationClass_Lec6
+import requests
+from pprint import pprint
+from bs4 import BeautifulSoup as bs
 
-여섯 번째 수업에서는 html 정보로부터 크롤링을 하는 방법에 대해 학습했다.
 
-소스코드 파일은 [https://github.com/dbsghtmd99/Python_AutomationClass_Lec6](https://github.com/dbsghtmd99/Python_AutomationClass_Lec6) 에서 확인 가능하다.
-
-## 1. 라이브러리 설명
-
-beautifulSoup : html 로부터 사용자가 원하는 값들을 크롤링 해오는 기능 제공
-
-## 2. 수업 때 다루었던 내용
-
-1. 네이버 실시간 검색어 순위 불러오기
-   
-```python
 def getRankList():
     url = 'https://www.naver.com/'
     html = requests.get(url)
@@ -45,11 +35,7 @@ def getRankList():
 
 
 # getRankList() # for test
-```
 
-2. 요일별 네이버 웹툰 제목 가져오기
-   
-```python
 def getWebtoonTitle():
     # 웹 페이지를 열고 소스코드를 읽어옵니다.
     url = "http://comic.naver.com/webtoon/weekday.nhn"
@@ -80,11 +66,7 @@ def getWebtoonTitle():
 
 
 # getWebtoonTitle() # for test
-```
 
-3. 요일별로 웹툰 썸네일 가져오기
-   
-```python
 import re, os
 from urllib.request import urlretrieve
 
@@ -124,13 +106,7 @@ def getThumbnail():
 
 
 # getThumbnail() # for test
-```
 
-## 3. 연습문제
-
-프로젝트가 유튜브와 관련되어 있어서 미리 연습 해보고자 수업을 한 당일 구현해보았다. 아래의 코드는 유튜브의 '인기' 탭에 있는 동영상들의 Url을 모두 가져오는 기능을 수행한다.
-
-```python
 def ex1():
     # 웹 페이지를 열고 소스코드를 읽어옵니다.
     url = "https://www.youtube.com/feed/trending/"
@@ -138,15 +114,9 @@ def ex1():
     soup = bs(html.text, 'html.parser')
     html.close()
 
-    # 아래의 클래스명은 f12 개발자 도구를 이용하여 찾으려 하였으나, 검색해도 나오지 않아 'a' 태그를 모두 출력한 후, 출력된 값들 중 찾고 있는 값을 검색하여 구해냈다.
     data1 = soup.findAll('a', {'class': 'yt-uix-tile-link yt-ui-ellipsis yt-ui-ellipsis-2 yt-uix-sessionlink spf-link'})
     for link in data1:
         YTurl = 'https://www.youtube.com' + link.get('href')
         print(YTurl)
 
-# ex1() # for test
-```
-
-실행 결과
-
-![1](test.png)
+ex1() # for test
